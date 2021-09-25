@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class TemperatureModelManager implements TemperatureModel
 {
@@ -27,13 +28,12 @@ public class TemperatureModelManager implements TemperatureModel
     Temperature old = getLastInsertedTemperature();
 
     temperatureList.addTemperature(temperature);
-//    temperatureList.addTemperature(id, temperature); //add temp to specific/separated map
-//    temperatureList.addTemperature2(id, temperature);
+    temperatureList.addTemperature(id, temperature); //add temp to specific/separated map
 
     if (old != null && old.getValue() != temperature.getValue())
     {
       changeSupport.firePropertyChange(id, old, temperature);
-      System.out.println("-->" + temperature + " (from: " + old + ")");
+//      System.out.println("-->" + temperature + " (from: " + old + ")");
     }
   }
 
@@ -71,7 +71,13 @@ public class TemperatureModelManager implements TemperatureModel
 
   public Collection<Temperature> getTemperatureCollection2(String key)
   {
-    return temperatureList.getTempMap().get(key);
+    ArrayList<Temperature> reversedList = new ArrayList<>();
+    for (Temperature t : temperatureList.getTempMap().get(key))
+    {
+      reversedList.add(t);
+    }
+    Collections.reverse(reversedList);
+    return reversedList;
   }
 }
 

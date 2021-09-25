@@ -54,8 +54,8 @@ public class TemperatureViewModel implements Listener
     double temperature = ((Temperature) evt.getNewValue()).getValue();
 
 //    table1TempList.add((Temperature) evt.getNewValue());  //table related
-//    table1TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
-    table1TempList.setAll(temperatureModel.getTemperatureCollection(evt.getPropertyName()));
+    table1TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
+//    table1TempList.setAll(temperatureModel.getTemperatureCollection(evt.getPropertyName()));
 
     Platform.runLater(()-> temperatureLabel1.setValue(evt.getNewValue().toString()));
     checkTemperatureLimits(temperature);

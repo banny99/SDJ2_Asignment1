@@ -20,28 +20,20 @@ public class TemperatureList
   {
     list.add(temperature);
   }
-  public void addTemperature2(String key, Temperature temperature)
+  public void addTemperature(String key, Temperature temperature)
   {
     if (!tempMap.containsKey(key)){
-      tempMap.put(key, new ArrayList<>(25));
+      tempMap.put(key, new ArrayList<>(20));
     }
 
-    if (tempMap.get(key).size() >= 20){
+    if (tempMap.get(key).size() >= 4){
       tempMap.get(key).remove(0);
-//      System.out.println(tempMap.size());
+      //      System.out.println(tempMap.size());
     }
 
     tempMap.get(key).add(temperature);
   }
 
-  public Temperature getTemperature(int index)
-  {
-    if (index >= 0 && index < list.size())
-    {
-      return list.get(index);
-    }
-    return null;
-  }
 
   public Temperature getLastTemperature(String id)
   {
@@ -91,5 +83,6 @@ public class TemperatureList
   {
     return list;
   }
+
 }
 
