@@ -1,10 +1,7 @@
 package mediator;
 
-import extern.Listener;
 import model.Temperature;
 import model.TemperatureList;
-import view.chart.TempChartViewModel;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -28,7 +25,8 @@ public class TemperatureModelManager implements TemperatureModel
     Temperature old = getLastInsertedTemperature();
 
     temperatureList.addTemperature(temperature);
-    temperatureList.addTemperature(id, temperature); //add temp to specific/separated map
+//    temperatureList.addTemperature(id, temperature); //add temp to specific/separated map
+    temperatureList.addTemperature2(id, temperature);
 
     if (old != null && old.getValue() != temperature.getValue())
     {

@@ -1,11 +1,10 @@
 package view.TemperatureOverview;
 
-import extern.Listener;
+import Util.Listener;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import mediator.HeaterModel;
 import mediator.TemperatureModel;
 import model.Temperature;

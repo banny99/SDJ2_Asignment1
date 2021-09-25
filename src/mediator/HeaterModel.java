@@ -1,12 +1,11 @@
 package mediator;
 
-import extern.Listener;
+import Util.Subject;
 
-public interface HeaterModel
+public interface HeaterModel extends Subject
 {
   void turnUp();
   void turnDown();
   int getPower();
 
-  void addListener(Listener l);
 }

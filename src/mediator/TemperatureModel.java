@@ -1,8 +1,6 @@
 package mediator;
 
 import model.Temperature;
-import view.chart.TempChartViewModel;
-
 import java.beans.PropertyChangeListener;
 
 public interface TemperatureModel

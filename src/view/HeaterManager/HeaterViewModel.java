@@ -1,6 +1,6 @@
 package view.HeaterManager;
 
-import extern.Listener;
+import Util.Listener;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

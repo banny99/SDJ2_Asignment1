@@ -1,7 +1,7 @@
 package model.heater;
 
-import extern.Listener;
-import extern.Subject;
+import Util.Listener;
+import Util.Subject;
 
 import java.util.ArrayList;
 

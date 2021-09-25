@@ -13,7 +13,6 @@ public class TemperatureViewController
   //--
   @FXML private TextField tf_min;
   @FXML private TextField tf_max;
-  @FXML private Button btn_submit;
 
   @FXML private Label lb_powerState;
 

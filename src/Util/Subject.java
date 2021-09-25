@@ -1,4 +1,4 @@
-package extern;
+package Util;
 
 public interface Subject
 {
