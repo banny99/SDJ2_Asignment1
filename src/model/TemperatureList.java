@@ -26,7 +26,7 @@ public class TemperatureList
       tempMap.put(key, new ArrayList<>(20));
     }
 
-    if (tempMap.get(key).size() >= 4){
+    if (tempMap.get(key).size() >= 20){
       tempMap.get(key).remove(0);
       //      System.out.println(tempMap.size());
     }

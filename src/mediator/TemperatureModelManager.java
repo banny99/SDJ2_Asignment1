@@ -79,5 +79,10 @@ public class TemperatureModelManager implements TemperatureModel
     Collections.reverse(reversedList);
     return reversedList;
   }
+
+  public Collection<Temperature> getTemperatureCollection3(String key)
+  {
+    return temperatureList.getTempMap().get(key);
+  }
 }
 

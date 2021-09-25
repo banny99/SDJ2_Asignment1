@@ -29,5 +29,11 @@ public class DateTime
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     return sdf.format(date);
   }
+
+  public String getTime(){
+    SimpleDateFormat sdf = new SimpleDateFormat(
+        "HH:mm:ss");
+    return sdf.format(date);
+  }
 }
 

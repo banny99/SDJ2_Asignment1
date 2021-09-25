@@ -10,20 +10,25 @@ import java.io.IOException;
 public class TempChartViewController
 {
   @FXML private LineChart tempChart;
-
-  private XYChart.Series dataSeries1;
+  private XYChart.Series series1;
+  private XYChart.Series series2;
+  private XYChart.Series series3;
 
   private TempChartViewModel tempChartViewModel;
   private ViewHandler viewHandler;
 
-  public void init(TempChartViewModel tvm, ViewHandler vh){
-    tempChartViewModel = tvm;
+  public void init(TempChartViewModel vm, ViewHandler vh){
+    tempChartViewModel = vm;
     viewHandler = vh;
 
-//    dataSeries1 = new XYChart.Series();
-//    dataSeries1.getData().add(tempChartViewModel.getList());
-//    dataSeries1.setData(tempChartViewModel.getList()); //binding
-//    tempChart.getData().add(dataSeries1);
+    series1 = new XYChart.Series();
+    series1.setData(tempChartViewModel.getList1()); //binding
+    series2 = new XYChart.Series();
+    series2.setData(tempChartViewModel.getList2()); //binding
+    series3 = new XYChart.Series();
+    series3.setData(tempChartViewModel.getList3()); //binding
+
+    tempChart.getData().addAll(series1, series2, series3);
   }
 
   public void onBackButtonPressed(ActionEvent actionEvent)

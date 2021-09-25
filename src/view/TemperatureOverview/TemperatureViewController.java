@@ -1,8 +1,6 @@
 package view.TemperatureOverview;
 
 import factory.ViewHandler;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,9 +12,14 @@ import java.io.IOException;
 public class TemperatureViewController
 {
 
-
   @FXML private TableView<Temperature> tbl_temp1;
   @FXML private TableColumn<Temperature, String> colTemp1;
+
+  @FXML private TableView<Temperature> tbl_temp2;
+  @FXML private TableColumn<Temperature, String> colTemp2;
+
+  @FXML private TableView<Temperature> tbl_temp3;
+  @FXML private TableColumn<Temperature, String> colTemp3;
 
 
   //--
@@ -49,6 +52,12 @@ public class TemperatureViewController
     //table binding:
     colTemp1.setCellValueFactory(new PropertyValueFactory<>("value"));
     tbl_temp1.setItems(temperatureViewModel.getTemperatureList1());
+
+    colTemp2.setCellValueFactory(new PropertyValueFactory<>("value"));
+    tbl_temp2.setItems(temperatureViewModel.getTemperatureList2());
+
+    colTemp3.setCellValueFactory(new PropertyValueFactory<>("value"));
+    tbl_temp3.setItems(temperatureViewModel.getTemperatureList3());
 
     lb_powerState.textProperty().bind(temperatureViewModel.requestPowerStateLabelProperty());
   }

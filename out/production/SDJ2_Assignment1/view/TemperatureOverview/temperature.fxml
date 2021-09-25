@@ -91,7 +91,7 @@
                         </Label>
                         <TableView fx:id="tbl_temp2" prefHeight="134.0" prefWidth="150.0">
                           <columns>
-                            <TableColumn prefWidth="178.66668701171875" text="Temperature 02" />
+                            <TableColumn fx:id="colTemp2" prefWidth="178.66668701171875" text="Temperature 02" />
                             <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
                           </columns>
                         </TableView>
@@ -109,7 +109,7 @@
                         </Label>
                         <TableView fx:id="tbl_temp3" prefHeight="200.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn prefWidth="178.66668701171875" text="Temperature 03" />
+                            <TableColumn fx:id="colTemp3" prefWidth="178.66668701171875" text="Temperature 03" />
                             <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
                           </columns>
                         </TableView>

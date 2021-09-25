@@ -17,6 +17,7 @@ public interface TemperatureModel
 
 
   Collection<Temperature> getTemperatureCollection(String key);
-  Collection<Temperature> getTemperatureCollection2(String propertyName);
+  Collection<Temperature> getTemperatureCollection2(String key);
+  Collection<Temperature> getTemperatureCollection3(String key);
 }
 

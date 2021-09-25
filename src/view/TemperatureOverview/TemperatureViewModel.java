@@ -26,6 +26,8 @@ public class TemperatureViewModel implements Listener
   private StringProperty powerStateLabel;
 
   private ObservableList<Temperature> table1TempList;
+  private ObservableList<Temperature> table2TempList;
+  private ObservableList<Temperature> table3TempList;
 
   private HeaterModel heaterModel;
   private TemperatureModel temperatureModel;
@@ -46,6 +48,8 @@ public class TemperatureViewModel implements Listener
     temperatureModel.addListener("t3", (evt) -> updateTemperature3(evt));
 
     table1TempList = FXCollections.observableArrayList();
+    table2TempList = FXCollections.observableArrayList();
+    table3TempList = FXCollections.observableArrayList();
   }
 
 
@@ -53,7 +57,6 @@ public class TemperatureViewModel implements Listener
   {
     double temperature = ((Temperature) evt.getNewValue()).getValue();
 
-//    table1TempList.add((Temperature) evt.getNewValue());  //table related
     table1TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
 //    table1TempList.setAll(temperatureModel.getTemperatureCollection(evt.getPropertyName()));
 
@@ -95,11 +98,13 @@ public class TemperatureViewModel implements Listener
   private void updateTemperature2(PropertyChangeEvent evt)
   {
     double temperature = ((Temperature) evt.getNewValue()).getValue();
+    table2TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
     Platform.runLater(()-> temperatureLabel2.setValue(evt.getNewValue().toString()));
   }
 
   private void updateTemperature3(PropertyChangeEvent evt)
   {
+    table3TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
     Platform.runLater(()-> temperatureLabel3.setValue(evt.getNewValue().toString()));
   }
 
@@ -146,5 +151,15 @@ public class TemperatureViewModel implements Listener
   public ObservableList<Temperature> getTemperatureList1()
   {
     return table1TempList;
+  }
+
+  public ObservableList<Temperature> getTemperatureList2()
+  {
+    return table2TempList;
+  }
+
+  public ObservableList<Temperature> getTemperatureList3()
+  {
+    return table3TempList;
   }
 }
