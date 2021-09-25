@@ -20,10 +20,10 @@ public class TemperatureList
   {
     list.add(temperature);
   }
-  public void addTemperature(String key, Temperature temperature)
+  public void addTemperature2(String key, Temperature temperature)
   {
     if (!tempMap.containsKey(key)){
-      tempMap.put(key, new ArrayList<Temperature>(25));
+      tempMap.put(key, new ArrayList<>(25));
     }
 
     if (tempMap.get(key) != null && tempMap.get(key).size() >= 20){
@@ -70,16 +70,16 @@ public class TemperatureList
 
   public String toString()
   {
-    String s = "{";
+    StringBuilder s = new StringBuilder("{");
     for (int i = 0; i < list.size(); i++)
     {
-      s += list.get(i);
+      s.append(list.get(i));
       if (i < list.size() - 1)
       {
-        s += ", ";
+        s.append(", ");
       }
     }
-    return s;
+    return s.toString();
   }
 }
 
