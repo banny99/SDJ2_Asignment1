@@ -26,7 +26,7 @@ public class TemperatureList
       tempMap.put(key, new ArrayList<>(25));
     }
 
-    if (tempMap.get(key) != null && tempMap.get(key).size() >= 20){
+    if (tempMap.get(key).size() >= 20){
       tempMap.get(key).remove(0);
 //      System.out.println(tempMap.size());
     }
@@ -80,6 +80,16 @@ public class TemperatureList
       }
     }
     return s.toString();
+  }
+
+  public Map<String, ArrayList<Temperature>> getTempMap()
+  {
+    return tempMap;
+  }
+
+  public ArrayList<Temperature> getList()
+  {
+    return list;
   }
 }
 

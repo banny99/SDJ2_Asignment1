@@ -103,6 +103,7 @@ public class Thermometer implements Runnable
       else {
         temperature = getIndoorTemperature(temperature, heaterModel.getPower(), distance, 0, 6);
       }
+
       temperatureModel.addTemperature(id, temperature);
 
       try

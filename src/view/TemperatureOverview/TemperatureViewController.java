@@ -1,14 +1,23 @@
 package view.TemperatureOverview;
 
 import factory.ViewHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Temperature;
 
 import java.io.IOException;
 
 public class TemperatureViewController
 {
+
+
+  @FXML private TableView<Temperature> tbl_temp1;
+  @FXML private TableColumn<Temperature, String> colTemp1;
+
 
   //--
   @FXML private TextField tf_min;
@@ -36,6 +45,10 @@ public class TemperatureViewController
     lb_temperature1.textProperty().bind(temperatureViewModel.requestTemperatureLabelProperty1());
     lb_temperature2.textProperty().bind(temperatureViewModel.requestTemperatureLabelProperty2());
     lb_temperature3.textProperty().bind(temperatureViewModel.requestTemperatureLabelProperty3());
+
+    //table binding:
+    colTemp1.setCellValueFactory(new PropertyValueFactory<>("value"));
+    tbl_temp1.setItems(temperatureViewModel.getTemperatureList1());
 
     lb_powerState.textProperty().bind(temperatureViewModel.requestPowerStateLabelProperty());
   }

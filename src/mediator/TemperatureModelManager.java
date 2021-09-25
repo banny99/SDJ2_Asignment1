@@ -4,6 +4,8 @@ import model.Temperature;
 import model.TemperatureList;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class TemperatureModelManager implements TemperatureModel
 {
@@ -26,7 +28,7 @@ public class TemperatureModelManager implements TemperatureModel
 
     temperatureList.addTemperature(temperature);
 //    temperatureList.addTemperature(id, temperature); //add temp to specific/separated map
-    temperatureList.addTemperature2(id, temperature);
+//    temperatureList.addTemperature2(id, temperature);
 
     if (old != null && old.getValue() != temperature.getValue())
     {
@@ -55,5 +57,21 @@ public class TemperatureModelManager implements TemperatureModel
       changeSupport.addPropertyChangeListener(name, listener);
   }
 
+
+  public Collection<Temperature> getTemperatureCollection(String key)
+  {
+    ArrayList<Temperature> tempTemperatureList = new ArrayList<>();
+    for (Temperature t : temperatureList.getList()){
+      if (t.getId().equals(key)){
+        tempTemperatureList.add(t);
+      }
+    }
+    return tempTemperatureList;
+  }
+
+  public Collection<Temperature> getTemperatureCollection2(String key)
+  {
+    return temperatureList.getTempMap().get(key);
+  }
 }
 

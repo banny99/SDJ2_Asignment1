@@ -4,6 +4,8 @@ import Util.Listener;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import mediator.HeaterModel;
 import mediator.TemperatureModel;
@@ -23,6 +25,8 @@ public class TemperatureViewModel implements Listener
   private StringProperty temperatureLabel3;
   private StringProperty powerStateLabel;
 
+  private ObservableList<Temperature> table1TempList;
+
   private HeaterModel heaterModel;
   private TemperatureModel temperatureModel;
 
@@ -40,12 +44,19 @@ public class TemperatureViewModel implements Listener
     temperatureModel.addListener("t1", (evt) -> updateTemperature1(evt));
     temperatureModel.addListener("t2", (evt) -> updateTemperature2(evt));
     temperatureModel.addListener("t3", (evt) -> updateTemperature3(evt));
+
+    table1TempList = FXCollections.observableArrayList();
   }
 
 
   private void updateTemperature1(PropertyChangeEvent evt)
   {
     double temperature = ((Temperature) evt.getNewValue()).getValue();
+
+//    table1TempList.add((Temperature) evt.getNewValue());  //table related
+//    table1TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
+    table1TempList.setAll(temperatureModel.getTemperatureCollection(evt.getPropertyName()));
+
     Platform.runLater(()-> temperatureLabel1.setValue(evt.getNewValue().toString()));
     checkTemperatureLimits(temperature);
   }
@@ -129,5 +140,11 @@ public class TemperatureViewModel implements Listener
   public double getMinTemp()
   {
     return minTemp;
+  }
+
+
+  public ObservableList<Temperature> getTemperatureList1()
+  {
+    return table1TempList;
   }
 }
