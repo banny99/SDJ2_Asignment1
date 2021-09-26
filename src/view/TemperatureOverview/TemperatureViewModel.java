@@ -12,6 +12,8 @@ import mediator.TemperatureModel;
 import model.Temperature;
 
 import java.beans.PropertyChangeEvent;
+import java.util.Collection;
+import java.util.Collections;
 
 public class TemperatureViewModel implements Listener
 {
@@ -43,69 +45,55 @@ public class TemperatureViewModel implements Listener
     heaterModel.addListener(this); //subscribing to the observing subject(heater)
 
     this.temperatureModel = tm;
-    temperatureModel.addListener("t1", (evt) -> updateTemperature1(evt));
-    temperatureModel.addListener("t2", (evt) -> updateTemperature2(evt));
-    temperatureModel.addListener("t3", (evt) -> updateTemperature3(evt));
+    temperatureModel.addListener("t1", (evt) -> updateTemperatures(evt));
+    temperatureModel.addListener("t2", (evt) -> updateTemperatures(evt));
+    temperatureModel.addListener("t3", (evt) -> updateTemperatures(evt));
 
     table1TempList = FXCollections.observableArrayList();
     table2TempList = FXCollections.observableArrayList();
     table3TempList = FXCollections.observableArrayList();
   }
 
+  private void updateTemperatures(PropertyChangeEvent evt){
+    Temperature temperature = ((Temperature) evt.getNewValue());
 
-  private void updateTemperature1(PropertyChangeEvent evt)
-  {
-    double temperature = ((Temperature) evt.getNewValue()).getValue();
+    if (temperature.getId().equals("t1"))
+      updateTemperature1(temperature);
 
-    table1TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
-//    table1TempList.setAll(temperatureModel.getTemperatureCollection(evt.getPropertyName()));
+    else if (temperature.getId().equals("t2"))
+      updateTemperature2(temperature);
 
-    Platform.runLater(()-> temperatureLabel1.setValue(evt.getNewValue().toString()));
-    checkTemperatureLimits(temperature);
-  }
-  private void checkTemperatureLimits(double temperature){
-    if (!isAnnouncedMin && temperature < minTemp){
-      isAnnouncedMin = true;
-      System.out.println("indoor temperature too low!");
-      Platform.runLater(() -> {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Temperature-limit crossed!");
-        alert.setHeaderText("Getting too cold, Brr");
-        alert.setContentText("The indoor temperature fell below desired temperature level.");
-        alert.showAndWait();
-      });
-    }
-    else if (!isAnnouncedMax && temperature > maxTemp){
-      isAnnouncedMax = true;
-      System.out.println("indoor temperature too high!");
-      Platform.runLater(() -> {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Temperature-limit crossed!");
-        alert.setHeaderText("Getting too hot, Uf");
-        alert.setContentText("The indoor temperature reached above desired temperature level.");
-        alert.showAndWait();
-      });
-    }
-
-    if (temperature > minTemp){
-      isAnnouncedMin = false;
-    }
-    if (temperature < maxTemp){
-      isAnnouncedMax = false;
-    }
+    else if (temperature.getId().equals("t3"))
+      updateTemperature3(temperature);
   }
 
-  private void updateTemperature2(PropertyChangeEvent evt)
+  private void updateTemperature1(Temperature temperature)
   {
-    double temperature = ((Temperature) evt.getNewValue()).getValue();
-    table2TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
-    Platform.runLater(()-> temperatureLabel2.setValue(evt.getNewValue().toString()));
+    if (table1TempList.size() >= 4){
+      table1TempList.remove(0);
+    }
+    table1TempList.add(temperature);
+    Platform.runLater(()-> temperatureLabel1.setValue(temperature.toString()));
+
+    checkTemperatureLimits(temperature.getValue());
   }
 
-  private void updateTemperature3(PropertyChangeEvent evt)
+  private void updateTemperature2(Temperature temperature)
   {
-    table3TempList.setAll(temperatureModel.getTemperatureCollection2(evt.getPropertyName()));
-    Platform.runLater(()-> temperatureLabel3.setValue(evt.getNewValue().toString()));
+    if (table2TempList.size() >= 4){
+      table2TempList.remove(0);
+    }
+    table2TempList.add(temperature);
+    Platform.runLater(()-> temperatureLabel2.setValue(temperature.toString()));
+  }
+
+  private void updateTemperature3(Temperature temperature)
+  {
+    if (table3TempList.size() >= 4){
+      table3TempList.remove(0);
+    }
+    table3TempList.add(temperature);
+    Platform.runLater(()-> temperatureLabel3.setValue(temperature.toString()));
   }
 
 
@@ -161,5 +149,38 @@ public class TemperatureViewModel implements Listener
   public ObservableList<Temperature> getTemperatureList3()
   {
     return table3TempList;
+  }
+
+
+  private void checkTemperatureLimits(double temperature){
+    if (!isAnnouncedMin && temperature < minTemp){
+      isAnnouncedMin = true;
+      System.out.println("indoor temperature too low!");
+      Platform.runLater(() -> {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Temperature-limit crossed!");
+        alert.setHeaderText("Getting too cold, Brr");
+        alert.setContentText("The indoor temperature fell below desired temperature level.");
+        alert.showAndWait();
+      });
+    }
+    else if (!isAnnouncedMax && temperature > maxTemp){
+      isAnnouncedMax = true;
+      System.out.println("indoor temperature too high!");
+      Platform.runLater(() -> {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Temperature-limit crossed!");
+        alert.setHeaderText("Getting too hot, Uf");
+        alert.setContentText("The indoor temperature reached above desired temperature level.");
+        alert.showAndWait();
+      });
+    }
+
+    if (temperature > minTemp){
+      isAnnouncedMin = false;
+    }
+    if (temperature < maxTemp){
+      isAnnouncedMax = false;
+    }
   }
 }

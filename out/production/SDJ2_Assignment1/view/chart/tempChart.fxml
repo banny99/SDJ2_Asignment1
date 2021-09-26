@@ -32,16 +32,13 @@
                   <Insets left="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <LineChart fx:id="tempChart" prefHeight="352.0" prefWidth="600.0">
+            <LineChart fx:id="tempChart">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
                 <NumberAxis side="LEFT" />
               </yAxis>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
             </LineChart>
          </children>
       </VBox>

@@ -16,8 +16,7 @@ public interface TemperatureModel
   void addListener(String name, PropertyChangeListener listener);
 
 
-  Collection<Temperature> getTemperatureCollection(String key);
-  Collection<Temperature> getTemperatureCollection2(String key);
-  Collection<Temperature> getTemperatureCollection3(String key);
+//  Collection<Temperature> getTemperatureCollection(String key);
+
 }
 

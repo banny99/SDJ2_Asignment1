@@ -4,9 +4,7 @@ import model.Temperature;
 import model.TemperatureList;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+
 
 public class TemperatureModelManager implements TemperatureModel
 {
@@ -25,10 +23,10 @@ public class TemperatureModelManager implements TemperatureModel
   @Override public void addTemperature(String id, double value)
   {
     Temperature temperature = new Temperature(id, value);
-    Temperature old = getLastInsertedTemperature();
+//    Temperature old = getLastInsertedTemperature();
+    Temperature old = getLastInsertedTemperature(id);
 
     temperatureList.addTemperature(temperature);
-    temperatureList.addTemperature(id, temperature); //add temp to specific/separated map
 
     if (old != null && old.getValue() != temperature.getValue())
     {
@@ -47,7 +45,7 @@ public class TemperatureModelManager implements TemperatureModel
     return temperatureList.getLastTemperature(id);
   }
 
-  // and maybe other methods...
+
 
   @Override public void addListener(String name, PropertyChangeListener listener)
   {
@@ -58,31 +56,15 @@ public class TemperatureModelManager implements TemperatureModel
   }
 
 
-  public Collection<Temperature> getTemperatureCollection(String key)
-  {
-    ArrayList<Temperature> tempTemperatureList = new ArrayList<>();
-    for (Temperature t : temperatureList.getList()){
-      if (t.getId().equals(key)){
-        tempTemperatureList.add(t);
-      }
-    }
-    return tempTemperatureList;
-  }
+//  public Collection<Temperature> getTemperatureCollection(String key)
+//  {
+//    ArrayList<Temperature> tempTemperatureList = new ArrayList<>();
+//    for (Temperature t : temperatureList.getList(key)){
+//      tempTemperatureList.add(t);
+//    }
+//    return tempTemperatureList;
+//  }
 
-  public Collection<Temperature> getTemperatureCollection2(String key)
-  {
-    ArrayList<Temperature> reversedList = new ArrayList<>();
-    for (Temperature t : temperatureList.getTempMap().get(key))
-    {
-      reversedList.add(t);
-    }
-    Collections.reverse(reversedList);
-    return reversedList;
-  }
 
-  public Collection<Temperature> getTemperatureCollection3(String key)
-  {
-    return temperatureList.getTempMap().get(key);
-  }
 }
 
