@@ -7,7 +7,6 @@ import javafx.scene.chart.XYChart;
 import mediator.TemperatureModel;
 import model.Temperature;
 import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
 
 public class TempChartViewModel
 {
